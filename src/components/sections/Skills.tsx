@@ -92,44 +92,32 @@ const Skills = () => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             A comprehensive toolkit of modern technologies and frameworks that I use to build exceptional digital experiences.
           </p>
-        </div>        <div ref={skillsRef} className="space-y-12">
-          {categories.map((category) => (
-            <div key={category} className="category-section">
-              <h3 className="text-2xl font-semibold mb-6 flex items-center">
-                <Badge variant="outline" className="mr-3 px-3 py-1">
-                  {category}
-                </Badge>
-              </h3>
-              
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {skills
-                  .filter(skill => skill.category === category)
-                  .map((skill) => (
-                    <div 
-                      key={skill.name} 
-                      className="skill-card group relative p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-gray-200 hover:border-transparent hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
-                    >
-                      {/* Gradient background that appears on hover */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                      
-                      {/* Content */}
-                      <div className="relative z-10">
-                        <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                          {skill.icon}
-                        </div>
-                        <h4 className="font-semibold text-gray-800 group-hover:text-white transition-colors duration-300">
-                          {skill.name}
-                        </h4>
-                      </div>
+        </div>        <div ref={skillsRef}>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+            {skills.map((skill) => (
+              <div 
+                key={skill.name} 
+                className="skill-card group relative p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-gray-200 hover:border-transparent hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
+              >
+                {/* Gradient background that appears on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                
+                {/* Content */}
+                <div className="relative z-10 text-center">
+                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                    {skill.icon}
+                  </div>
+                  <h4 className="font-semibold text-gray-800 group-hover:text-white transition-colors duration-300 text-sm">
+                    {skill.name}
+                  </h4>
+                </div>
 
-                      {/* Shine effect */}
-                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out" />
-                    </div>
-                  ))}
+                {/* Shine effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out" />
               </div>
-            </div>
-          ))}
-        </div>        {/* Additional technologies grid */}
+            ))}
+          </div>
+        </div>{/* Additional technologies grid */}
         <div className="mt-16">
           <h3 className="text-2xl font-semibold mb-8 text-center">Additional Technologies</h3>
           <div className="flex flex-wrap justify-center gap-3">
