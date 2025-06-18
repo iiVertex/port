@@ -8,20 +8,19 @@ import { Badge } from '@/components/ui/badge';
 const Skills = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
-
   const skills = [
-    { name: 'React', level: 90, category: 'Frontend' },
-    { name: 'Next.js', level: 85, category: 'Frontend' },
-    { name: 'TypeScript', level: 80, category: 'Language' },
-    { name: 'JavaScript', level: 95, category: 'Language' },
-    { name: 'Tailwind CSS', level: 90, category: 'Styling' },
-    { name: 'GSAP', level: 75, category: 'Animation' },
-    { name: 'Framer Motion', level: 80, category: 'Animation' },
-    { name: 'Node.js', level: 70, category: 'Backend' },
-    { name: 'MongoDB', level: 65, category: 'Database' },
-    { name: 'Git', level: 85, category: 'Tools' },
-    { name: 'Figma', level: 80, category: 'Design' },
-    { name: 'Responsive Design', level: 95, category: 'Frontend' },
+    { name: 'React', icon: '⚛️', category: 'Frontend', color: 'from-blue-400 to-cyan-400' },
+    { name: 'Next.js', icon: '▲', category: 'Frontend', color: 'from-gray-800 to-gray-600' },
+    { name: 'TypeScript', icon: 'TS', category: 'Language', color: 'from-blue-600 to-blue-400' },
+    { name: 'JavaScript', icon: 'JS', category: 'Language', color: 'from-yellow-400 to-orange-400' },
+    { name: 'Tailwind CSS', icon: '🎨', category: 'Styling', color: 'from-teal-400 to-cyan-400' },
+    { name: 'GSAP', icon: '🎬', category: 'Animation', color: 'from-green-400 to-emerald-400' },
+    { name: 'Framer Motion', icon: '🎭', category: 'Animation', color: 'from-purple-400 to-pink-400' },
+    { name: 'Node.js', icon: '🟢', category: 'Backend', color: 'from-green-500 to-green-400' },
+    { name: 'MongoDB', icon: '🍃', category: 'Database', color: 'from-green-600 to-green-400' },
+    { name: 'Git', icon: '📦', category: 'Tools', color: 'from-orange-500 to-red-500' },
+    { name: 'Figma', icon: '🎯', category: 'Design', color: 'from-purple-500 to-pink-500' },
+    { name: 'HTML5', icon: '🌐', category: 'Frontend', color: 'from-orange-500 to-red-500' },
   ];
 
   const categories = [...new Set(skills.map(skill => skill.category))];
@@ -29,13 +28,12 @@ const Skills = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      // Animate skills on scroll
-      gsap.fromTo('.skill-item', 
+    const ctx = gsap.context(() => {      // Animate skill cards on scroll
+      gsap.fromTo('.skill-card', 
         {
           opacity: 0,
           y: 30,
-          scale: 0.9
+          scale: 0.8
         },
         {
           opacity: 1,
@@ -53,26 +51,27 @@ const Skills = () => {
         }
       );
 
-      // Animate progress bars
-      gsap.fromTo('.skill-bar', 
-        {
-          width: '0%'
-        },
-        {
-          width: (index, target) => {
-            const level = target.getAttribute('data-level');
-            return `${level}%`;
-          },
-          duration: 1.5,
-          ease: 'power3.out',
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: skillsRef.current,
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
+      // Hover animations for skill cards
+      const skillCards = document.querySelectorAll('.skill-card');
+      skillCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            scale: 1.05,
+            rotate: 2,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            scale: 1,
+            rotate: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+      });
 
     }, sectionRef);
 
@@ -93,41 +92,44 @@ const Skills = () => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             A comprehensive toolkit of modern technologies and frameworks that I use to build exceptional digital experiences.
           </p>
-        </div>
-
-        <div ref={skillsRef} className="space-y-12">
+        </div>        <div ref={skillsRef} className="space-y-12">
           {categories.map((category) => (
-            <div key={category} className="skill-item">
+            <div key={category} className="category-section">
               <h3 className="text-2xl font-semibold mb-6 flex items-center">
                 <Badge variant="outline" className="mr-3 px-3 py-1">
                   {category}
                 </Badge>
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {skills
                   .filter(skill => skill.category === category)
                   .map((skill) => (
-                    <div key={skill.name} className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-700">{skill.name}</span>
-                        <span className="text-sm text-gray-500">{skill.level}%</span>
+                    <div 
+                      key={skill.name} 
+                      className="skill-card group relative p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-gray-200 hover:border-transparent hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
+                    >
+                      {/* Gradient background that appears on hover */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                      
+                      {/* Content */}
+                      <div className="relative z-10">
+                        <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                          {skill.icon}
+                        </div>
+                        <h4 className="font-semibold text-gray-800 group-hover:text-white transition-colors duration-300">
+                          {skill.name}
+                        </h4>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                        <div 
-                          className="skill-bar h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-300"
-                          data-level={skill.level}
-                          style={{ width: '0%' }}
-                        />
-                      </div>
+
+                      {/* Shine effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out" />
                     </div>
                   ))}
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Additional technologies grid */}
+        </div>        {/* Additional technologies grid */}
         <div className="mt-16">
           <h3 className="text-2xl font-semibold mb-8 text-center">Additional Technologies</h3>
           <div className="flex flex-wrap justify-center gap-3">
@@ -139,7 +141,7 @@ const Skills = () => {
               <Badge
                 key={tech}
                 variant="secondary"
-                className="px-4 py-2 text-sm hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white transition-all duration-300 cursor-default"
+                className="px-4 py-2 text-sm hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white hover:scale-105 transition-all duration-300 cursor-default"
               >
                 {tech}
               </Badge>
