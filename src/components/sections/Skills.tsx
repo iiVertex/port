@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/badge'; 
 
 const Skills = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
