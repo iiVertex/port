@@ -7,23 +7,20 @@ import { Badge } from '@/components/ui/badge';
 
 const Skills = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const skillsRef = useRef<HTMLDivElement>(null);
-  const skills = [
-    { name: 'React', icon: '⚛️', category: 'Frontend', color: 'from-blue-400 to-cyan-400' },
-    { name: 'Next.js', icon: '▲', category: 'Frontend', color: 'from-gray-800 to-gray-600' },
-    { name: 'TypeScript', icon: 'TS', category: 'Language', color: 'from-blue-600 to-blue-400' },
-    { name: 'JavaScript', icon: 'JS', category: 'Language', color: 'from-yellow-400 to-orange-400' },
-    { name: 'Tailwind CSS', icon: '🎨', category: 'Styling', color: 'from-teal-400 to-cyan-400' },
-    { name: 'GSAP', icon: '🎬', category: 'Animation', color: 'from-green-400 to-emerald-400' },
-    { name: 'Framer Motion', icon: '🎭', category: 'Animation', color: 'from-purple-400 to-pink-400' },
-    { name: 'Node.js', icon: '🟢', category: 'Backend', color: 'from-green-500 to-green-400' },
-    { name: 'MongoDB', icon: '🍃', category: 'Database', color: 'from-green-600 to-green-400' },
-    { name: 'Git', icon: '📦', category: 'Tools', color: 'from-orange-500 to-red-500' },
-    { name: 'Figma', icon: '🎯', category: 'Design', color: 'from-purple-500 to-pink-500' },
-    { name: 'HTML5', icon: '🌐', category: 'Frontend', color: 'from-orange-500 to-red-500' },
+  const skillsRef = useRef<HTMLDivElement>(null);  const skills = [
+    { name: 'React', icon: '⚛️', color: 'from-blue-400 to-cyan-400' },
+    { name: 'Next.js', icon: '▲', color: 'from-gray-800 to-gray-600' },
+    { name: 'TypeScript', icon: 'TS', color: 'from-blue-600 to-blue-400' },
+    { name: 'JavaScript', icon: 'JS', color: 'from-yellow-400 to-orange-400' },
+    { name: 'Tailwind CSS', icon: '🎨', color: 'from-teal-400 to-cyan-400' },
+    { name: 'GSAP', icon: '🎬', color: 'from-green-400 to-emerald-400' },
+    { name: 'Framer Motion', icon: '🎭', color: 'from-purple-400 to-pink-400' },
+    { name: 'Node.js', icon: '🟢', color: 'from-green-500 to-green-400' },
+    { name: 'MongoDB', icon: '🍃', color: 'from-green-600 to-green-400' },
+    { name: 'Git', icon: '📦', color: 'from-orange-500 to-red-500' },
+    { name: 'Figma', icon: '🎯', color: 'from-purple-500 to-pink-500' },
+    { name: 'HTML5', icon: '🌐', color: 'from-orange-500 to-red-500' },
   ];
-
-  const categories = [...new Set(skills.map(skill => skill.category))];
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
