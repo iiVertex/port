@@ -11,21 +11,28 @@ import Experience from '@/components/sections/Experience';
 import Contact from '@/components/sections/Contact';
 import Navigation from '@/components/Navigation';
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+// Register GSAP plugins on client side only
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Home() {
   useEffect(() => {
-    // Smooth scrolling configuration
-    gsap.set('html', {
-      scrollBehavior: 'smooth'
-    });
+    // Only run on client side
+    if (typeof window !== 'undefined') {
+      // Smooth scrolling configuration
+      gsap.set('html', {
+        scrollBehavior: 'smooth'
+      });
 
-    // Initialize scroll animations
-    ScrollTrigger.refresh();
+      // Initialize scroll animations
+      ScrollTrigger.refresh();
+    }
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      if (typeof window !== 'undefined') {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      }
     };
   }, []);
 

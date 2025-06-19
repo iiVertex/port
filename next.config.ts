@@ -1,7 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  experimental: {
+    optimizePackageImports: ['gsap'],
+  },
+  images: {
+    remotePatterns: [],
+  },
 };
 
 export default nextConfig;
